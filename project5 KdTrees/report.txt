@@ -1,0 +1,77 @@
+1. Enter the number of hours it took you to complete the project between
+   the <<< and >>> signs below (eg, <<<10>>>).
+
+   <<< 28 >>>
+   
+2. Enter the difficulty level (1: very easy; 5: very difficult) of the project
+   between the <<< and >>> signs below (eg, <<<3>>>).
+
+   <<< 4 >>>
+
+3. Provide a short description of how you approached each problem, issues you 
+   encountered, and how you resolved those issues.
+
+   Problem 1 (Brute-force Implementation)
+      Approach: Follow the instruction.
+
+      Issues and resolution:
+      No issues, just follow the instruction. But there are two details need to aware.
+      1)In "public Point2D nearest(Point2D p)" method, make sure the given point p is not
+      the point already in bst.keys, because it`s not make sense, you cannot compare the distance
+      to a point itself.
+      2) In "public Iterable<Point2D> nearest(Point2D p, int k)" method, we create MinPQ to keep
+      nearest point goes up after inserting them and we delet the top one, so there might have a
+      situation is that the MinPQ will become empty, so we need to add a condition "!pq.isEmpty()"
+      when we iterate points.
+
+      Time complexity: T(n) due to we need go through each point.
+
+   Problem 2 (2dTree Implementation)
+      Approach: Follow the instruction
+
+      Issues and resolution:
+
+      Calling the <KdTreePointST> constructor without arguments
+      Setting up the class object using the following steps:
+         Calling <put> a total of 1000 times
+      Then checking all values in the subtree rooted at <root>
+
+       org.opentest4j.AssertionFailedError:
+      Using the toString() method to compare objects.
+      Failed when comparing the <rect> field of <Node> at level 2 (if applicable)
+      Route so far: 0:Start↓lb1:↓lb2:
+
+      This test puts up to 1000 entries from a random data file, then does
+      a PreOrder walk of the tree, comparing the variables in each Node against
+      the solution. If this fails and all other tests pass, please let me know if
+      need help or a better hint so I can review it.
+
+       ==> expected: <[-Infinity, -Infinity] x [0.224522, 0.380456]> but was: <[-Infinity, -Infinity] x [0.134664, Infinity]>
+
+     I got the above error message. It told me that my put method has something wrong, so i went
+     over the public put method and nothing wrong there, then went over the private put method.
+     According the rest of err message, I found the rect argument fail to compare. Before insert new
+      node, we need to compare x-coordinate of the root and the point need to be inserted, if new point has a
+     smaller x-coordinate go left, otherwise go right. we need to create new rect and put the
+     appropriate rect arguments, but I gave the arguments in a wrong order. After fixing the order,
+     the err message is gone.
+
+     Time complexity: T(logn).The core optimization are in method range() and nearest().
+     In range(), we recursively search when the query rectangle dosen`t intersect the rectangle
+     corresponding to a node, that means we only search a subtree only it might contain the point.
+     so we reduce the time to logn. Same idea in method nearest().
+
+
+4. Did you receive help from anyone? List their names, status (classmate, 
+   CS210 grad, TA, other), and the nature of help received.
+
+   Name               Status       Help Received
+   ----               ------       -------------
+
+   SI               ...          ...
+
+5. List any other comments here. Feel free to provide any feedback on how
+   much you learned from doing the assignment, and whether you enjoyed
+   doing it.
+
+   ...
